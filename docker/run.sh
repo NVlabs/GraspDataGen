@@ -149,7 +149,7 @@ echo ""
 set -e
 
 
-
+xhost +local:docker
 docker run \
   -v /tmp/.X11-unix:/tmp/.X11-unix \
   -e DISPLAY=$DISPLAY \
@@ -167,4 +167,4 @@ docker run \
   $VOLUME_MOUNTS \
   graspdatagen \
   /bin/bash
-  
+xhost -local:docker

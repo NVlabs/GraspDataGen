@@ -37,27 +37,31 @@ All parameters are optional. The script accepts the following arguments:
 
 - `--graspdatagen_code <path>` (optional): Path to the GraspDataGen code directory. This is mostly used for debugging and when users wish to make live updates to the code in their container.
 
-**Examples:**
+**Test Installation:**
+
+Once the docker container is build, you can test the instalation by generating some grasps and then validating a few of them on an object already in the GraspDataGen repo.
 
 ```bash
-# Basic run with no additional parameters
+cd GraspDataGen
+
 ./docker/run.sh
 
-# With grasp dataset directory
-./docker/run.sh --grasp_dataset /path/to/grasp_dataset
+# You should not be inside a docker container in the /code/GraspDataGen folder with a # prompt.
+# Run the command to generate the guesses with the Robotiq_2f_85 gripper.
+python scripts/graspgen/grasp_guess.py --gripper_config robotiq_2f_85
 
-# With object dataset directory  
-./docker/run.sh --object_dataset /path/to/object_dataset
-
-# With GraspGen code directory
-./docker/run.sh --grasp_gen_code /path/to/grasp_gen
-
-# With GraspDataGen code directory (for development)
-./docker/run.sh --graspdatagen_code .
-
-# With all parameters
-./docker/run.sh --grasp_dataset /path/to/grasp_dataset --object_dataset /path/to/object_dataset --grasp_gen_code /path/to/grasp_gen --graspdatagen_code .
+# That command will open up a headless IsaacLab session to build the gripper definition, and then it will generate 1024 grasps.
+# Run the command the validate the grasps, and visualize the simulation as it runs.
+python scripts/graspgen/grasp_sim.py --grasp_file /grasp_dataset/grasp_guess_data/robotiq_2f_85/mug.yaml --force_headed --max_num_grasps 16
 ```
+
+**Note**: If you are having trouble opening an IsaacLab GUI, remove the `--force_headed` flag from the last command above.  You can then visualize the grasps with meshcat using the following command:
+
+```bash
+# Start a meshcat server to visualise the results, instead of watching the simulation in the IsaacLab UI
+python scripts/graspgen/tools/visualize_grasp_data.py --grasp-paths /grasp_dataset/grasp_sim_data/robotiq_2f_85/mug.yaml
+```
+
 
 ### Method 2: With Existing IsaacLab pip Installation
 
