@@ -153,3 +153,17 @@ python scripts/graspgen/grasp_sim.py \
   - [Verify Grasps with Simulation](docs/examples/grasp-sim.md) - Verify user-defined grasps with simulation
 - **[API Reference](docs/api/)** - Configuration and technical details
   - [Args and Parameters](docs/api/parameter-system.md)
+
+## Citation
+
+If you found this work to be useful, please considering citing:
+
+```
+@article{murali2025graspgen,
+  title={GraspGen: A Diffusion-based Framework for 6-DOF Grasping with On-Generator Training},
+  author={Murali, Adithyavairavan and Sundaralingam, Balakumar and Chao, Yu-Wei and Yamada, Jun and Yuan, Wentao and Carlson, Mark and Ramos, Fabio and Birchfield, Stan and Fox, Dieter and Eppner, Clemens},
+  journal={arXiv preprint arXiv:2507.13097},
+  url={https://arxiv.org/abs/2507.13097},
+  year={2025},
+}
+```
